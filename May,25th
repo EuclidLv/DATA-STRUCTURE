@@ -1,0 +1,72 @@
+void InitList(SqList*L)
+{
+	SqList *L = new SqList;
+	for (int i = 0; i < MaxSize; i++)
+	{
+		*L->data = 0;
+	}
+	(*L).length = 0;
+}
+
+void DestoryList(SqList* L)
+{
+	delete L;
+}
+
+bool ListEmpty(const SqList*L)
+{
+	int length = (*L).length;
+	if (0 == length)
+		return false;
+	else
+		return true;
+}
+
+int ListLength(const SqList*L)
+{
+	return((*L).length);
+}
+void DispList(const SqList*L)
+{
+	for (int i = 0; i < MaxSize && (*L).data[i] != '\0'; i++)
+	{
+		cout << i + 1 << " = " << (*L).data[i];
+	}
+}
+int GetElem(const SqList* L, int i)
+{
+	int locate = 0;
+	while ((L->data[locate] != i)&&(locate<=MaxSize))
+	{
+		locate++;
+	}
+	if (locate < MaxSize)
+		return(locate + 1);
+	else
+		return -1;
+}
+int LocateElem(const SqList*L, int i)
+{
+	{
+		int n = 0;
+		for (n = 0; n != i; n++)
+			;
+		return(L->data[n]);
+	}
+}
+void ListInsert(SqList*L, int i, int e)
+{
+	int temp = 0;
+	int temp1 = 0;
+	temp = L->data[i];
+	L->data[i] = e;
+	for (int n = 0; n <= MaxSize-i; n++)
+	{
+		temp1=L->data[i + n + 1];
+		L->data[i + n + 1] = temp;
+	}
+}
+void ListDelete(SqList*, int, int)
+{
+
+}
