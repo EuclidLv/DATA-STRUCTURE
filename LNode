@@ -1,0 +1,97 @@
+//头插法
+#include <iostream>
+using namespace std;
+const int MaxSize = 10;
+typedef int ElemType;
+typedef struct LNode
+{
+	ElemType data;
+	LNode* next;
+};
+
+LNode* CreatList(LNode*);
+void PrintList(const LNode*);
+int main()
+{
+	LNode* L=NULL;
+	LNode* Ln=CreatList(L);
+	PrintList(Ln);
+	return 0;
+}
+
+LNode* CreatList(LNode* L)
+{
+	L = new LNode;
+	L->next = NULL;
+	for (int i = 0; i < MaxSize; i++)
+	{
+		LNode* p = new LNode;
+		cout << i + 1 << " : ";
+		cin >> p->data;
+		p->next = L->next;
+		L->next = p;
+	}
+	return L;
+}
+
+void PrintList(const LNode* L)
+{
+	auto p = L->next;
+	while (p != NULL)
+	{
+		cout << p->data << endl;
+		p = p->next;
+	}
+}
+
+
+
+
+
+//尾插法
+#include <iostream>
+using namespace std;
+const int MaxSize = 10;
+typedef int ElemType;
+typedef struct LNode
+{
+	ElemType data;
+	LNode* next;
+};
+
+LNode* CreatList(LNode* L);
+void PrintList(const LNode* L);
+
+int main()
+{
+	LNode* L=NULL;
+	LNode* Ln = CreatList(L);
+	PrintList(Ln);
+	return 0;
+}
+
+LNode* CreatList(LNode* L)
+{
+	L = new LNode;
+	LNode* s2 = L;
+	for (int i = 0; i < MaxSize; i++)
+	{
+		LNode* p = new LNode;
+		cout << "please enter a number: ";
+		cin >> p->data;
+		s2->next = p;
+		p->next = NULL;
+		s2 = p;
+	}
+	return L;
+}
+
+void PrintList(const LNode* L)
+{
+	auto p = L->next;
+	while (p != NULL)
+	{
+		cout << p->data << endl;
+		p = p->next;
+	}
+}
