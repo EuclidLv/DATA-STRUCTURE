@@ -1,0 +1,4 @@
+﻿  functionfeature.cpp
+E:\DATAproject\ProjectDataStruct\ProjectDataStruct\headfunction.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“student_inf”的左侧
+E:\DATAproject\ProjectDataStruct\ProjectDataStruct\functionfeature.cpp(55,57): warning C4244: “=”: 从“double”转换到“float”，可能丢失数据
+  ProjectDataStruct.vcxproj -> E:\DATAproject\ProjectDataStruct\x64\Debug\ProjectDataStruct.exe
