@@ -1,3 +1,4 @@
+#define _CRT_SECURE_NO_WARNINGS
 #include <iostream>
 #include <fstream>
 #include <string>
@@ -7,6 +8,8 @@ using std::cout;
 using std::cin;
 using  std::endl;
 
+
+//this is main menu
 int menu()
 {
     int p = 0;
@@ -14,17 +17,19 @@ int menu()
     cout << "\t\t\t1. 信息输入\n";          //ListInsert
     cout << "\t\t\t2.总分统计\n";           //totalSore
     cout << "\t\t\t3.总分查询\n";           //totalScoreFind
-    cout << "\t\t\t4.查询\n";         //stop
-    cout << "\t\t\t5.分数排序\n";
-    cout << "\t\t\t6.随机抽人数\n";
-    cout << "\t\t\t7.打印所输入表格\n";
+    cout << "\t\t\t4.查询\n";               //Find
+    cout << "\t\t\t5.分数排序\n";           //SortList
+    cout << "\t\t\t6.随机抽人数\n";         //randomPer
+    cout << "\t\t\t7.打印所输入表格\n";     //printList
     cout << "\t\t\t(q)to quit\n";
     cout << "\t\t请选择想要进行的项目： ";
     cin >> p;
     return p;
 }
 
-void ListInsert(student_inf* L, std::istream &os, int n)
+
+//the first and must done step to set up the LNode
+void ListInsert(student_inf*& L, std::istream &os, int n)
 {
     L = new student_inf;
     L->next = NULL;
@@ -50,6 +55,7 @@ void ListInsert(student_inf* L, std::istream &os, int n)
 }
 
 
+//caculate the total score
 void totalScore(const student_inf* L)
 {
     float sum = 0;
@@ -62,6 +68,7 @@ void totalScore(const student_inf* L)
     }
 }
 
+//user input the total score to find a student whose total score matches the input
 bool totalScoreFind(const student_inf* L ,float n)
 {
     float sum = 0;
@@ -83,6 +90,7 @@ bool totalScoreFind(const student_inf* L ,float n)
 }
 
 
+//this menu is works for the find and sort part
 int menu1()
 {
     int choice = 0;
@@ -95,6 +103,8 @@ int menu1()
     return choice;
 }
 
+
+//find part
 void Find(const student_inf* L)
 {
     auto p = L->next;
@@ -112,10 +122,7 @@ void Find(const student_inf* L)
         {
             if (!strcmp(name, p->name))
             {
-                cout << "name: " << p->name << "\t" << "ID: " << p->ID << endl;
-                cout << "\t\t\tChinese score: " << p->ChineseScore << endl;
-                cout << "\t\t\t Mathematics score: " << p->MathematicsScore << endl;
-                cout << "\t\t\tEnglish score: " << p->EnglishScore << endl;
+                printFunction(p);
             }
             p = p->next;
         }
@@ -130,10 +137,7 @@ void Find(const student_inf* L)
         {
             if (0 == (id - (p->ID)))
             {
-                cout << "name: " << p->name << "\t" << "ID: " << p->ID << endl;
-                cout << "\t\t\tChinese score: " << p->ChineseScore << endl;
-                cout << "\t\t\t Mathematics score: " << p->MathematicsScore << endl;
-                cout << "\t\t\tEnglish score: " << p->EnglishScore << endl;
+                printFunction(p);
             }
             p = p->next;
         }
@@ -148,10 +152,7 @@ void Find(const student_inf* L)
         {
             if (0 == (score - (p->ChineseScore)))
             {
-                cout << "name: " << p->name << "\t" << "ID: " << p->ID << endl;
-                cout << "Chinese score: " << p->ChineseScore << endl;
-                cout << "Mathematics score: " << p->MathematicsScore << endl;
-                cout << "English score: " << p->EnglishScore << endl;
+                printFunction(p);
             }
             p = p->next;
         }
@@ -166,10 +167,7 @@ void Find(const student_inf* L)
         {
             if (0 == (score - (p->MathematicsScore)))
             {
-                cout << "name: " << p->name << "\t" << "ID: " << p->ID << endl;
-                cout << "Chinese score: " << p->ChineseScore << endl;
-                cout << "Mathematics score: " << p->MathematicsScore << endl;
-                cout << "English score: " << p->EnglishScore << endl;
+                printFunction(p);
             }
             p = p->next;
         }
@@ -184,10 +182,7 @@ void Find(const student_inf* L)
         {
             if (0 == (score - (p->EnglishScore)))
             {
-                cout << "ID: " << p->ID << endl;
-                cout << "Chinese score: " << p->ChineseScore << endl;
-                cout << "Mathematics score: " << p->MathematicsScore << endl;
-                cout << "English score: " << p->EnglishScore << endl;
+                printFunction(p);
             }
             p = p->next;
         }
@@ -199,32 +194,125 @@ void Find(const student_inf* L)
         cout << "You've ENTERED bad input";
     }
 }
-    
-void sortList(student_inf* L)
+
+void printFunction(student_inf* p)
 {
+    cout << "name: " << p->name << "\t" << "ID: " << p->ID << endl;
+    cout << "\t\t\tChinese score: " << p->ChineseScore << endl;
+    cout << "\t\t\t Mathematics score: " << p->MathematicsScore << endl;
+    cout << "\t\t\tEnglish score: " << p->EnglishScore << endl;
+}
+
+//sort part
+void sortList(student_inf*& L,int n)
+{
+    student_inf* p = L->next;
+    student_inf* nextt = p;
     int choice = 0;
     choice = menu1();
     switch (choice)
     {
     case 1:
-        ; break;
+        for (int i = 0; i < n; i++)
+        {
+            p = (p + i);
+            while (nextt != NULL)
+            {
+                if (int(strcmp(p->name, nextt->name)) >= 0)
+                {
+                    swap(*p, *nextt);
+                    nextt = nextt->next;
+                }
+                else
+                {
+                    nextt = nextt->next;
+                }
+            };
+        }break;
     case 2:
-        ; break;
+        for (int i = 0; i < n; i++)
+        {
+            p = (p + i);
+           
+            while (nextt != NULL)
+            {
+                if ((p->ID) - (nextt->ID) >= 0)
+                {
+                    swap(*p, *nextt);
+                    nextt = nextt->next;
+                }
+                else
+                {
+                    nextt = nextt->next;
+                }
+            }
+        }; break;
     case 3:
-        ; break;
+        for (int i = 0; i < n; i++)
+        {
+            p = L->next;
+           while(p->next!=NULL||p!=NULL)
+            {   
+                if ((p->ChineseScore) > ((p->next)->ChineseScore))
+                    swap(*p, *p->next);
+                p = p->next;
+            }
+        }
+       ; break;
     case 4:
-        ; break;
+        for (int i = 0; i < n; i++)
+        {
+            p = (p + i);
+            while (nextt != NULL)
+            {
+                if ((p->MathematicsScore) - (nextt->MathematicsScore) >= 0)
+                {
+                    swap(*p, *nextt);
+                    nextt = nextt->next->next;
+                }
+                else
+                {
+                    nextt = nextt->next;
+                }
+            }
+        }; break;
+    case 5:
+        for (int i = 0; i < n; i++)
+        {
+            p = (p + i);
+            while (nextt != NULL)
+            {
+                if ((p->EnglishScore) - (nextt->EnglishScore) >= 0)
+                {
+                    swap(*p, *nextt);
+                    nextt = nextt->next->next;
+                }
+                else
+                {
+                    nextt = nextt->next;
+                }
+            }; break;
+        }
     default:
         cout << "You've ENTERED bad input";
     }
 }
 
-void swap(student_inf* L)
-{
 
+//swap works for the sort part
+void swap(student_inf& p, student_inf& next)
+{
+    student_inf temp;
+    temp = p;
+    p = next;
+    next = temp;
 }
 
 
+
+ 
+
+//to find a students randomly
 void randomPer(const student_inf* L, int n)
 {
     int num = 0;
@@ -246,17 +334,17 @@ void randomPer(const student_inf* L, int n)
     }
 
 }
+
+
+//to show your LNode
 void printList(const student_inf* L)
 {
     int i = 1;
-    auto p = L ->next;
+    student_inf* p = L ->next;
     while (p != NULL)
     {
         cout << " # " << i;
-        cout << "name: " << p->name << "\t" << "ID: " << p->ID << endl;
-        cout << "\t\t\tChinese score: " << p->ChineseScore << endl;
-        cout << "\t\t\t Mathematics score: " << p->MathematicsScore << endl;
-        cout << "\t\t\tEnglish score: " << p->EnglishScore << endl;
+        printFunction(p);
         i++;
         p = p->next;
     }
