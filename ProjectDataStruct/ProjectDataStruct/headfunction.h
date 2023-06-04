@@ -21,7 +21,7 @@ void printFunction(student_inf*);
 void Find(const student_inf*);
 int menu1();
 
-void sortList(student_inf*&,int);
+void sortList(student_inf*,int);
 void swap(student_inf&,student_inf&);
 
 void randomPer(const student_inf*, int);

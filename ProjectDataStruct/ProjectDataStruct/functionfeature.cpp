@@ -18,7 +18,7 @@ int menu()
     cout << "\t\t\t2.总分统计\n";           //totalSore
     cout << "\t\t\t3.总分查询\n";           //totalScoreFind
     cout << "\t\t\t4.查询\n";               //Find
-    cout << "\t\t\t5.分数排序\n";           //SortList
+    cout << "\t\t\t5.排序\n";           //SortList
     cout << "\t\t\t6.随机抽人数\n";         //randomPer
     cout << "\t\t\t7.打印所输入表格\n";     //printList
     cout << "\t\t\t(q)to quit\n";
@@ -204,7 +204,7 @@ void printFunction(student_inf* p)
 }
 
 //sort part
-void sortList(student_inf*& L,int n)
+void sortList(student_inf* L,int n)
 {
     student_inf* p = L->next;
     student_inf* nextt = p;
@@ -215,84 +215,58 @@ void sortList(student_inf*& L,int n)
     case 1:
         for (int i = 0; i < n; i++)
         {
-            p = (p + i);
-            while (nextt != NULL)
+            p = L->next;
+            while (p != NULL && p->next != NULL)
             {
-                if (int(strcmp(p->name, nextt->name)) >= 0)
-                {
-                    swap(*p, *nextt);
-                    nextt = nextt->next;
-                }
-                else
-                {
-                    nextt = nextt->next;
-                }
-            };
+                if (int(strcmp(p->name,p->next->name))>0)
+                    swap(*p, *p->next);
+                p = p->next;
+            }
         }break;
     case 2:
         for (int i = 0; i < n; i++)
         {
-            p = (p + i);
-           
-            while (nextt != NULL)
+            p = L->next;
+            while (p != NULL && p->next != NULL)
             {
-                if ((p->ID) - (nextt->ID) >= 0)
-                {
-                    swap(*p, *nextt);
-                    nextt = nextt->next;
-                }
-                else
-                {
-                    nextt = nextt->next;
-                }
+                if ((p->ID) > ((p->next)->ID))
+                    swap(*p, *p->next);
+                p = p->next;
             }
         }; break;
     case 3:
         for (int i = 0; i < n; i++)
         {
             p = L->next;
-           while(p->next!=NULL||p!=NULL)
-            {   
+            while (p != NULL && p->next != NULL)
+            {
                 if ((p->ChineseScore) > ((p->next)->ChineseScore))
                     swap(*p, *p->next);
                 p = p->next;
             }
-        }
-       ; break;
+        }; break;
     case 4:
         for (int i = 0; i < n; i++)
         {
-            p = (p + i);
-            while (nextt != NULL)
+            p = L->next;
+            while (p != NULL && p->next != NULL)
             {
-                if ((p->MathematicsScore) - (nextt->MathematicsScore) >= 0)
-                {
-                    swap(*p, *nextt);
-                    nextt = nextt->next->next;
-                }
-                else
-                {
-                    nextt = nextt->next;
-                }
+                if ((p->MathematicsScore) > ((p->next)->MathematicsScore))
+                    swap(*p, *p->next);
+                p = p->next;
             }
         }; break;
     case 5:
         for (int i = 0; i < n; i++)
         {
-            p = (p + i);
-            while (nextt != NULL)
+            p = L->next;
+            while (p != NULL && p->next != NULL)
             {
-                if ((p->EnglishScore) - (nextt->EnglishScore) >= 0)
-                {
-                    swap(*p, *nextt);
-                    nextt = nextt->next->next;
-                }
-                else
-                {
-                    nextt = nextt->next;
-                }
-            }; break;
-        }
+                if ((p->EnglishScore) > ((p->next)->EnglishScore))
+                    swap(*p, *p->next);
+                p = p->next;
+            }
+        }; break;
     default:
         cout << "You've ENTERED bad input";
     }
