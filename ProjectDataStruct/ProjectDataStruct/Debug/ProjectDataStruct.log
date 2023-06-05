@@ -1,0 +1,3 @@
+﻿  functionfeature.cpp
+E:\DATAproject\ProjectDataStruct\ProjectDataStruct\headfunction.h(12,2): warning C4091: “typedef ”: 没有声明变量时忽略“student_inf”的左侧
+  ProjectDataStruct.vcxproj -> E:\DATAproject\ProjectDataStruct\Debug\ProjectDataStruct.exe

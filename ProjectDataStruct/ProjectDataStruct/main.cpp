@@ -9,7 +9,7 @@ int main()
 	char filename[20]{};                      //this two part use to store a text name
 	student_inf* L = nullptr;
 	int p, num,score_find,choice;
-	p = num =score_find= choice=0;            
+	p = num =score_find= choice =0;            
 	cout << "how many students are there in your class: ";
 	cin >> num;                              //num is imporatant in the following part T(o) and S(o)
     again:

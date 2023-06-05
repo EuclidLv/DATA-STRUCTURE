@@ -8,6 +8,7 @@ using std::cout;
 using std::cin;
 using  std::endl;
 
+int choice = 0;                 //定义全局变量choice用于menu1函数
 
 //this is main menu
 int menu()
@@ -58,7 +59,7 @@ void ListInsert(student_inf*& L, std::istream &os, int n)
 //caculate the total score
 void totalScore(const student_inf* L)
 {
-    float sum = 0;
+    double sum = 0;
     auto p = L->next;
     while (p!=NULL)
     {
@@ -68,10 +69,11 @@ void totalScore(const student_inf* L)
     }
 }
 
+
 //user input the total score to find a student whose total score matches the input
 bool totalScoreFind(const student_inf* L ,float n)
 {
-    float sum = 0;
+    double sum = 0;
     int count = 0;
     auto p = L->next;
     while (p != NULL)
@@ -91,9 +93,8 @@ bool totalScoreFind(const student_inf* L ,float n)
 
 
 //this menu is works for the find and sort part
-int menu1()
+int menu1(int& choice)
 {
-    int choice = 0;
     cout << "\t\t\t1.按姓名\n";
     cout << "\t\t\t2.按学号\n";
     cout << "\t\t\t3.按语文成绩\n";
@@ -107,12 +108,11 @@ int menu1()
 //find part
 void Find(const student_inf* L)
 {
-    auto p = L->next;
-    int choice = 0; 
-    char name[20]{};
+    auto p = L->next; 
+    std::string name;
     int id = 0;
     int score = 0;
-    choice = menu1();
+    menu1(choice);
     switch (choice)
     {
     case 1:
@@ -120,7 +120,7 @@ void Find(const student_inf* L)
         cin >> name;
         while (p != NULL)
         {
-            if (!strcmp(name, p->name))
+            if(name==p->name)
             {
                 printFunction(p);
             }
@@ -195,21 +195,22 @@ void Find(const student_inf* L)
     }
 }
 
+
 void printFunction(student_inf* p)
 {
     cout << "name: " << p->name << "\t" << "ID: " << p->ID << endl;
     cout << "\t\t\tChinese score: " << p->ChineseScore << endl;
-    cout << "\t\t\t Mathematics score: " << p->MathematicsScore << endl;
+    cout << "\t\t\tMathematics score: " << p->MathematicsScore << endl;
     cout << "\t\t\tEnglish score: " << p->EnglishScore << endl;
 }
+
 
 //sort part
 void sortList(student_inf* L,int n)
 {
     student_inf* p = L->next;
     student_inf* nextt = p;
-    int choice = 0;
-    choice = menu1();
+    menu1(choice);
     switch (choice)
     {
     case 1:
@@ -218,7 +219,7 @@ void sortList(student_inf* L,int n)
             p = L->next;
             while (p != NULL && p->next != NULL)
             {
-                if (int(strcmp(p->name,p->next->name))>0)
+                if((p->name)>(p->next->name))
                     swap(*p, *p->next);
                 p = p->next;
             }
@@ -241,7 +242,10 @@ void sortList(student_inf* L,int n)
             while (p != NULL && p->next != NULL)
             {
                 if ((p->ChineseScore) > ((p->next)->ChineseScore))
+                {
                     swap(*p, *p->next);
+                    continue;
+                }
                 p = p->next;
             }
         }; break;
@@ -277,14 +281,27 @@ void sortList(student_inf* L,int n)
 void swap(student_inf& p, student_inf& next)
 {
     student_inf temp;
-    temp = p;
-    p = next;
-    next = temp;
+    temp.name = p.name;
+    p.name = next.name;
+    next.name = temp.name;
+
+    temp.ID = p.ID;
+    p.ID = next.ID;
+    next.ID = temp.ID;
+
+    temp.ChineseScore = p.ChineseScore;
+    p.ChineseScore = next.ChineseScore;
+    next.ChineseScore = temp.ChineseScore;
+
+    temp.MathematicsScore = p.MathematicsScore;
+    p.MathematicsScore = next.MathematicsScore;
+    next.MathematicsScore = temp.MathematicsScore;
+
+    temp.EnglishScore = p.EnglishScore;
+    p.EnglishScore = next.EnglishScore;
+    next.EnglishScore = temp.EnglishScore;
 }
 
-
-
- 
 
 //to find a students randomly
 void randomPer(const student_inf* L, int n)
