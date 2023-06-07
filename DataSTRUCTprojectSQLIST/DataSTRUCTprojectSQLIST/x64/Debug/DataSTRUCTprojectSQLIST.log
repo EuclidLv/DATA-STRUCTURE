@@ -1,0 +1,4 @@
+﻿  main.cpp
+E:\DATAproject\DataSTRUCTprojectSQLIST\DataSTRUCTprojectSQLIST\headfuntions.h(9,2): warning C4091: “typedef ”: 没有声明变量时忽略“data_A”的左侧
+E:\DATAproject\DataSTRUCTprojectSQLIST\DataSTRUCTprojectSQLIST\headfuntions.h(13,2): warning C4091: “typedef ”: 没有声明变量时忽略“students_inf”的左侧
+  DataSTRUCTprojectSQLIST.vcxproj -> E:\DATAproject\DataSTRUCTprojectSQLIST\x64\Debug\DataSTRUCTprojectSQLIST.exe
