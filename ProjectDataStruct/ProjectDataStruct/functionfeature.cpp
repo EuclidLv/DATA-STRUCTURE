@@ -112,81 +112,92 @@ void Find(const student_inf* L)
     std::string name;
     int id = 0;
     int score = 0;
+    int count = 0;
     menu1(choice);
     switch (choice)
     {
     case 1:
         cout << "student's name: ";
         cin >> name;
+        count = 0;
         while (p != NULL)
         {
             if(name==p->name)
             {
                 printFunction(p);
+                count++;
             }
             p = p->next;
         }
-        if (p == NULL)
+        if (0 == count)
         {
             cout << "not find such infmoration.\n";
         }break;
     case 2:
         cout << "student's ID: ";
         cin >> id;
+        count = 0;
         while (p != NULL)
         {
             if (0 == (id - (p->ID)))
             {
                 printFunction(p);
+                count++;
             }
             p = p->next;
         }
-        if (p == NULL)
+        if (0 == count)
         {
             cout << "not find such infmoration.\n";
         }break;
     case 3:
         cout << "student's Chinese score: ";
         cin >> score;
+        count = 0;
         while (p != NULL)
         {
             if (0 == (score - (p->ChineseScore)))
             {
                 printFunction(p);
+                count++;
             }
             p = p->next;
         }
-        if (p == NULL)
+        if (0 == count)
         {
             cout << "not find such infmoration.\n";
         }break;
     case 4:
         cout << "student's Mathematics score: ";
         cin >> score;
+        count = 0;
         while (p != NULL)
         {
             if (0 == (score - (p->MathematicsScore)))
             {
                 printFunction(p);
+                count++;
             }
             p = p->next;
         }
-        if (p == NULL)
+        if (0 == count)
         {
             cout << "not find such infmoration.\n";
         }break;
     case 5:
         cout << "student's English score: ";
         cin >> score;
+        count = 0;
         while (p != NULL)
         {
             if (0 == (score - (p->EnglishScore)))
             {
                 printFunction(p);
+                count++;
             }
             p = p->next;
         }
-        if (p == NULL)
+        if (0 == count)
         {
             cout << "not find such infmoration.\n";
         }break;
@@ -196,7 +207,7 @@ void Find(const student_inf* L)
 }
 
 
-void printFunction(student_inf* p)
+void printFunction(const student_inf* p)
 {
     cout << "name: " << p->name << "\t" << "ID: " << p->ID << endl;
     cout << "\t\t\tChinese score: " << p->ChineseScore << endl;
@@ -323,7 +334,6 @@ void randomPer(const student_inf* L, int n)
         }
         p = p->next;
     }
-
 }
 
 
